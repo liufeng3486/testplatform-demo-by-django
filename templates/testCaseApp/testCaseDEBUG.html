@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<style type="text/css">
+div#left{float:left;}
+</style>
+
+<head>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+{#    以下是python编辑器格式关键字等相关CSS,JS。COPY于菜鸟工具#}
+    <script src="/static/css/runoob/codemirror.min.js"></script>
+    <link rel="stylesheet" href="/static/css/runoob/codemirror.css">
+    <script src="/static/css/runoob/python.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/runoob/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/runoob/style.css?version=1.01">
+    <!-- jQuery -->
+    <script src="/static/css/runoob/jquery.min.js"></script>
+</head>
+<body>
+
+<script>
+    $(document).ready(function(){
+
+    $("#submitBTN").click(function() {
+
+        code = editor.getValue();
+        alert(code);
+
+        $.get("runTestCase/",{'a':code},
+ function(ret){$('#compiler-textarea-result').html(ret)})
+
+    });
+
+});
+
+
+
+</script>
+
+<div class="container">
+<br>
+<div class="row">
+
+	<div class="col-md-12">
+		<div class="panel panel-default">
+					<div id="compiler" class="panel-heading">
+			<form class="form-inline" role="form">
+				 <button type="button" class="btn btn-success" id="submitBTN"><i class="fa fa-send-o"></i> 点击运行</button>
+				 <label class="pull-right"><strong style="font-size: 16px"><i class="fa fa-cogs"></i> Python 在线工具</strong></label>
+			</form>
+			</div>
+			<div class="panel-body">
+			<form role="form" id="compiler-form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-7">
+                    <textarea class="form-control"  id="code" name="code" rows="12" value="dddd"># -*- coding: utf8 -*-
+import time
+from  TestCasePro.PAR.parm import *
+from TestCasePro.FUC import *
+from TestCasePro.CASE.casetemplate import *
+import math
+class test(CaseTemplate):
+    def case(self):
+        writeToTxt("test!!!!!!!")
+        return False
+</textarea>
+                  </div>
+                  <div class="col-md-5">
+                    <textarea placeholder="运行结果……" class="form-control" id="compiler-textarea-result" rows="12"></textarea>
+                  </div>
+                </div>
+              </div>
+
+
+            </form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12">
+		<div id="about" class="panel panel-default">
+			<div class="panel-heading">概述</div>
+			<div class="panel-body">
+			<p>该工具基于 Python2.7.x，可以实现在线编译 Python 代码……</p>			</div>
+        </div>
+
+	</div>
+</div>
+    </div>
+<script>
+var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+	lineNumbers: true,
+	matchBrackets: true,
+	mode: "text/x-python",
+	indentUnit: 4,
+	indentWithTabs: true,
+});
+
+</script>
+</body>
+</html>
+

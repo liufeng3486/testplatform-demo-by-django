@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+div#container{width:500px}
+div#header {background-color:#99bbbb;text-align:center;}
+div#menu {background-color:#ffff99;height:200px;width:150px;float:left;}
+div#content {background-color:#EEEEEE;height:200px;width:350px;float:left;}
+div#footer {background-color:#99bbbb;clear:both;text-align:center;}
+div#left{float:left;}
+div#right{float:right;}
+
+h1 {margin-bottom:0;}
+h2 {margin-bottom:0;font-size:18px;}
+ul {margin:0;}
+li {list-style:none;}
+</style>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<div class="top_menubg">
+    <div class="mainscreen">
+    <div class="floatleft" >
+        <div id="ioffice_portal_tabs_vertial" class="ioffice_portal_tabs">
+            <ul>
+                <li class ="nav_t">
+                    <span class="portaltitletext"><a href="/">Home</a></span>
+                </li>
+                <li class ="nav_t">
+                    <span class="portaltitletext" ><a href="" onclick="javascript:history.back(1)">Back</a></span>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</div>
+
+</head>
+<body height=100%>
+    <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
+	<div id="header_menu">
+	<u><a    style="cursor:pointer;margin-left: 20px;">TEST</a></u>
+    <u> <a   style="cursor:pointer;margin-left: 20px;">TEST</a></u>
+        <u> <a   style="cursor:pointer;margin-left: 20px;">TEST</a></u>
+        <u> <a   style="cursor:pointer;margin-left: 20px;">TEST</a></u>
+	</div>
+    <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=2)" width="100%" color=#987cb9 SIZE=10>
+
+
+{#<p>请输入加密原字段1</p>#}
+{#<form action="md5/" method="get">#}
+{#<div id="header">#}
+{#  pass:<input cols="30" rows="5" id="pass" name="a" value="e682a8e8be93e585a5e79a84e697a7e5af86e7a081e99499e8afaf222c2264617461223a6e756c6c7d" >#}
+{#</div>#}
+{#<div id="header">#}
+{#  salt:<input cols="30" rows="5" id="salt" name="a_1" value="salt" >#暂未使用#}
+{#  #}
+{#</div>#}
+{##}
+{#<div id="header"> #}
+{#    <button type="button" id='sum'>提交</button>#}
+{#</div>#}
+{#<div id ="footer">#}
+{#  #}
+{#  <div id="result" name="result" style="text-align: left"></div>#}
+{#</div>#}
+{#    #}
+{##}
+{#</form>#}
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+String.prototype.format = function (param) {
+            var reg = /{([^{}]+)}/gm;
+            return this.replace(reg, function (match, name) {
+                return param[name];
+            });
+        }
+    $(document).ready(function(){
+        $("#sum_1").click(function(){
+        var pass = $("#ctl00_ContentPlaceHolder1_TextBoxq").val();
+        var salt = $("#ctl00_ContentPlaceHolder1_TextBoxSalt").val();
+        $.get("md5/",{'pass':pass,'salt':salt}, function(ret){
+            det =  eval("(" + ret + ")");
+            var string = ""
+            for(i in det){
+              string += "<font color='red'>"+i+"</font>"+":"+det[i] + "<br>"
+            }
+            $('#ctl00_ContentPlaceHolder1_LabelResult').html(string)
+        })
+      });
+    });
+</script>
+<div id="main">
+	            &nbsp;&nbsp;&nbsp; &nbsp;<table align="center"  border="0" cellpadding="0" cellspacing="0"
+                width="100%">
+                <tr>
+                    <td style="padding-right: 10px; padding-bottom: 10px; line-height: 14pt; padding-top: 10px"
+                        valign="top" align="center">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td  valign="top"  align="center">
+                                    <table id="table2" bgcolor="#888888" border="0" cellpadding="3" cellspacing="0" width="560" >
+                                        <tr>
+                                            <td bgcolor="#5C87B2" style="padding-right: 6px; padding-left: 6px; padding-bottom: 3px;
+                                                padding-top: 3px; height: 28px">
+                                                <font style="line-height: 11pt">
+												<span id="ctl00_ContentPlaceHolder1_Label2" style="display:inline-block;width:50px;">Pass:</span>
+                                                <input name="ctl00$ContentPlaceHolder1$TextBoxq" type="text" id="ctl00_ContentPlaceHolder1_TextBoxq" style="width:400px;" />	&nbsp;
+                                                <br />
+                                                <span id="ctl00_ContentPlaceHolder1_Label3" style="display:inline-block;width:50px;">Salt:</span>
+                                                    <input name="ctl00$ContentPlaceHolder1$TextBoxSalt" type="text" id="ctl00_ContentPlaceHolder1_TextBoxSalt" style="width:400px;" />
+                                                <br />
+                                                <span id="ctl00_ContentPlaceHolder1_Label4" style="display:inline-block;width:50px;"></span>
+                                                <input type="submit"  value="加密" id="sum_1" class="bigNum" style="border-style:Outset;width:144px;" /></font></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table  align="center" id="table3" bgcolor="#5C87B2" border="1" cellpadding="1" cellspacing="1" width="560" >
+                            <tr>
+                                <td bgcolor="white" style="padding-right: 16px; padding-left: 8px; padding-bottom: 15px;
+                                    line-height: 14pt; padding-top: 10px; text-align: left; height: 82px;" valign="top">
+                                    <span style="text-align: left">
+                                        <span id="Label1" style="color: #0000c0"></span>
+                                        Result:
+									&nbsp;<br />
+                                        <span id="ctl00_ContentPlaceHolder1_LabelResult"></span>
+                                        <br />
+                                    </span>
+                                    <div>
+                                        &nbsp;</div>
+                                </td>
+                            </tr>
+                        </table>
+            </td>
+            </tr>
+            </table>
+
+</div>
+
+
+</body>
+</html>
+

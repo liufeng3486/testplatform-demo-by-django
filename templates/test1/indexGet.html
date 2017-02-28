@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The list of</title>
+</head>
+<body>
+<h2>GET</h2>
+{% if Request_List %}
+    {% for request in Request_List %}
+            {% if request.type == "GET" %}
+                <li><a href="/test1/get/{{request.id}}/">{{ request.name }}</a></li>
+            {% endif %}
+    {% endfor %}
+</ul>
+{% else %}
+<p>no person_list</p>
+{% endif %}
+</body>
+</html>
+<html>
+	
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data" >
+{{uf.as_p}}
+<script type="text/javascript">
+function doPy(i)
+{
+ $.get("md5/",{'a':i},
+ function(ret){$('#c').html(ret)})
+}
+function downFile(i)
+{
+ $.get("upload/",{'a':i})
+}
+function f5show(i)
+{
+     $.get("md5/",{'a':i},
+    function(ret){ window.parent.document.getElementById("myframe2").setAttribute("src","/auto_py/rep_show?a={0}".replace("{0}",ret))})
+    window.location.reload();
+}
+function runTestCase(i)
+{
+    $.get("testCaseRun/",{'path':i},
+    function(ret){ window.parent.document.getElementById("myframe2").setAttribute("src","/auto_py/rep_show?a={0}".replace("{0}",ret))})
+    window.location.reload();
+}
+</script>
+{% if c %}
+  {%for i in c %}
+    <li name={{i}}>{{i}}
+{#    <li name={{i}}>{{i}}  <button onclick="f5show('{{i}}')">test</button>button_{{i}}#}
+{#  {% if i in txt_list%}#}
+{#     <a href="upload?a={{i}}.txt">log:{{i}}</a>#}
+{#  {%endif%}#}
+  {% endfor %}
+  </li>
+ {% endif %}
+<button onclick="runTestCase('./TestCasePro/CASE/')">runcase</button>
+
+
+
+</li>
+</form>
+</body>
+</html>

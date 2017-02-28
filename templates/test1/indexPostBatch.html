@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The list of</title>
+</head>
+<body>
+<h2>POST BATCH</h2>
+{% if Request_List %}
+    {% for request in Request_List %}
+            {% if request.type == "POST" %}
+                <li><a href="/test1/post_batch/{{request.id}}/">{{ request.name }}</a></li>
+            {% endif %}
+    {% endfor %}
+</ul>
+{% else %}
+<p>no person_list</p>
+{% endif %}
+</body>
+</html>
+<html>
+	
+</html>

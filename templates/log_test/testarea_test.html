@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>ff</title>
+<Script Language="JavaScript">
+function ta()
+{
+//----------------------------
+var oFont1=document.createElement("FONT");
+var oText1=document.createTextNode('中国');
+oFont1.style.color="black";
+form1.topic.appendChild(oFont1);
+oFont1.appendChild(oText1);
+//----------------------------
+var oFont2=document.createElement("FONT");
+var oText2=document.createTextNode('人民');
+oFont2.style.color="#ff3322";
+form1.topic.appendChild(oFont2);
+oFont2.appendChild(oText2);
+//----------------------------
+var oFont3=document.createElement("FONT");
+var oText3=document.createTextNode('解放\r');
+oFont3.style.color="#00eeff";
+form1.topic.appendChild(oFont3);
+oFont3.appendChild(oText3);
+//----------------------------
+var oFont4=document.createElement("FONT");
+var tex = "哈哈的哈哈的军人";
+var oText4=document.createTextNode(tex);
+oFont4.style.color="#00ee00";
+form1.topic.appendChild(oFont4);
+oFont4.appendChild(oText4);
+}
+</Script>
+</head>
+<body>
+<form name="form1" action="" method="post">
+<textarea id="test" name="topic" rows="10" cols="40"></textarea>
+<input type="button" value="提交" onClick="ta()">
+</form>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<script type="text/javascript" language="javascript">
+function iFrameHeight() {
+var ifm= document.getElementById("iframepage");
+var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;
+if(ifm != null && subWeb != null) {
+   ifm.height = subWeb.body.scrollHeight;
+   ifm.width = subWeb.body.scrollWidth;
+}
+}
+</script>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+<html>
+<head>
+
+</head>
+<body>
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<div class="top_menubg">
+    <div class="mainscreen">
+    <div class="floatleft" >
+        <div id="ioffice_portal_tabs_vertial" class="ioffice_portal_tabs">
+            <ul>
+                <li class ="nav_t">
+                    <span class="portaltitletext"><a href="/">Home</a></span>
+                </li>
+                <li class ="nav_t">
+                    <span class="portaltitletext" ><a href="" onclick="javascript:history.back(1)">Back</a></span>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</div>
+<div style="float:left; margin:10px 5px 15px 30px;" >
+    <h1>文件上传</h1>
+
+<form method="post" enctype="multipart/form-data" >
+{{uf.as_p}}
+
+<input type="submit" value="ok"/>
+</form>
+    <h1>----------------</h1>
+        <iframe frameborder=0  name="myframe1" src="/auto_py/do_py" id = "myframe1" width="800" marginheight="0" onLoad="iFrameHeight()"></iframe>
+    <h1>----------------</h1>
+        <iframe frameborder=0  name="myframe2" src="/auto_py/rep_show?a=null" id = "myframe2" width="100%" onLoad="iFrameHeight()"></iframe>
+    <h1>----------------</h1>
+        <iframe frameborder=0  name="myframe3" src="/auto_py/testCaseShow" id = "myframe2" width="100%" onLoad="iFrameHeight()"></iframe>
+</div>
+
+</body>
+</html>

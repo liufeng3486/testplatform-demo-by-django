@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+      <script src="/static/css/runoob/jquery.min.js"></script>
+      <script type="text/javascript" language="javascript">
+
+{#          获取日志#}
+             function update(log_num) {
+            $.get("getLog/",{'log_num':log_num,'user_name':"test1"},
+                          function(ret){$('#compiler-textarea-result'+log_num).append(ret)})
+{#                 alert(ret)#}
+            }
+{#            开始log抓取#}
+             function startLog(limit,log_num){
+                 $.get("startLog/",{'log_num':log_num,'user_name':"test1"});
+                 $('#sign_'+log_num).text(3)
+                 f5_log(1,log_num);
+             }
+{#            停止log抓取#}
+            function endLog(log_num){
+                $('#sign_'+log_num).text(0)
+                $.get("endLog/",{'log_num':log_num,'user_name':"test1"})
+            }
+
+            function f5_log(start_sign,log_num){
+                limit=parseInt(document.getElementById("sign_"+log_num).innerText);
+{#                alert(start_sign)#}
+                if(start_sign==limit){
+                    start_sign=0;
+                    update(log_num);
+                };
+                if(start_sign<limit){start_sign +=1;}
+                if(start_sign>limit){return 0}
+                temp = limit-start_sign
+
+                $('#content'+log_num).text((limit-start_sign) + '秒后刷新');
+                c =  setTimeout(function() {
+                   f5_log(start_sign,log_num);
+                }, 1000)
+            }
+
+            function clear_textarea2(i){
+               $.get("downLog/",{'log_num':"ddd",'user_name':"test1"}
+               );
+{#                var x=document.getElementById("compiler-textarea-result0").value;#}
+{#                url = "downLog?log_num="+"\'"+"sdfdsf&f=sdfdsf"+"\'"#}
+{#                window.location.href= url;#}
+{#                alert("2");#}
+            }
+function clear_textarea(i) {
+     var x=document.getElementById("compiler-textarea-result0").value;
+    PARAMS = {'log_num':x,'user_name':"test1"}
+    URL = "downLog/"
+    var temp = document.createElement("form");
+    temp.action = URL;
+    temp.method = "post";
+    temp.style.display = "none";
+    for (var x in PARAMS) {
+        var opt = document.createElement("textarea");
+        opt.name = x;
+        opt.value = PARAMS[x];
+        temp.appendChild(opt);
+    }
+    document.body.appendChild(temp);
+    temp.submit();
+    return temp;
+}
+
+             function end(i){
+                 window.clearInterval(c);
+{#                 $.get("endLog/",{'a':"2"})#}
+{#                 i = 5;#}
+
+{#                    function(ret){$('#content').append(ret)})#}
+             }
+
+
+{#           $(document).ready(function() {#}
+{#               timeDown(3, 0);#}
+{#         })#}
+    </script>
+
+ <link rel="stylesheet" type="text/css" href="/static/log_test/css/bootstrap.min.css">
+
+     <script src="/static/css/runoob/codemirror.min.js"></script>
+    <link rel="stylesheet" href="/static/css/runoob/codemirror.css">
+    <script src="/static/css/runoob/python.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/runoob/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/runoob/style.css?version=1.01">
+    <!-- jQuery -->
+    <script src="/static/css/runoob/jquery.min.js"></script>
+
+{#    <script src="js/bootstrap.min.js"></script>#}
+    <script type="text/javascript" src="/static/log_test/js/jquery-3.1.0.js"></script>
+    	<script type="text/javascript" src="/static/log_test/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/log_test/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="/static/log_test/js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" src="/static/log_test/js/jquery.htmlClean.js"></script>
+{#<script type="text/javascript" src="ckeditor/ckeditor.js"></script>#}
+{#<script type="text/javascript" src="ckeditor/config.js"></script>#}
+<script type="text/javascript" src="/static/log_test/js/scripts.js"></script>
+  </head>
+
+  <body>
+  <style>
+#end {
+
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+#left_tab{
+    background-color:#eeeeee;
+    width:20%;
+    float:left;
+    padding:10px;
+}
+
+#middle_show {
+    background-color:#eeeeee;
+    width:80%;
+    float:left;
+    padding:10px;
+}
+#table_show {
+    width:200px;
+    float:left;
+    padding:10px;
+}
+
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+   padding:5px;
+}
+</style>
+
+   <div class="container-fluid" >
+	<div class="row-fluid">
+		<div class="span2" id="left_tab">
+			<div class="accordion" id="accordion-52953">
+				<div class="accordion-group">
+                    <div id="sign_0"></div>
+                    <div id="sign_1"></div>
+					<div class="accordion-heading">
+						 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-52953" href="#accordion-element-143732">选项卡 #1</a>
+					</div>
+					<div id="accordion-element-143732" class="accordion-body in collapse">
+						<div class="accordion-inner">
+                            <input type="button" onClick="startLog(3,0)" value="Start">
+                            <input type="button" onClick="endLog(0)" value="End">
+                            <input type="button" onClick="clear_textarea(0)" value="Clear">
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-52953" href="#accordion-element-458390">选项卡 #2</a>
+					</div>
+					<div id="accordion-element-458390" class="accordion-body collapse">
+						<div class="accordion-inner">
+							<input type="button" onClick="startLog(3,1)" value="Start">
+                            <input type="button" onClick="endLog(1)" value="End">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span6" id="middle_show">
+			<div class="tabbable" id="tabs-649558">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel-898935" data-toggle="tab">第一部分</a>
+					</li>
+					<li>
+						<a href="#panel-858290" data-toggle="tab">第二部分</a>
+					</li>
+				</ul>
+				<div class="tab-content" contenteditable="true">
+					<div class="tab-pane active" id="panel-898935">
+						<p>
+    <h1>Ajax Test</h1>
+    <p id="time"></p>
+    <div id="content0"></div>
+							<textarea  spellcheck="false" placeholder="运行结果……" class="form-control" id="compiler-textarea-result0" rows="12" name="dddd">
+222
+                            </textarea>
+						</p>
+					</div>
+					<div class="tab-pane" id="panel-858290">
+						<p>
+			 <h1>Ajax Test</h1>
+    <p id="time"></p>
+    <div id="content1"></div>
+							<textarea  spellcheck="false" placeholder="运行结果……" class="form-control" id="compiler-textarea-result1" rows="12" name="dddd" readOnly="true">
+                                </textarea>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="span4" id="end">
+			<table class="table table-hover table-bordered">
+				<thead>
+					<tr>
+						<th>
+							代号
+						</th>
+						<th>
+							中文
+						</th>
+						<th>
+							IP
+						</th>
+						<th>
+							name
+						</th>
+						<th>
+							password
+						</th>
+						<th>
+							path
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							1
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							Default
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr class="success">
+						<td>
+							1
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+						<td>
+							Approved
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr class="error">
+						<td>
+							2
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+						</td>
+						<td>
+							Declined
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr class="warning">
+						<td>
+							3
+						</td>
+						<td>
+							TB - Month
+						</td>
+						<td>
+						</td>
+						<td>
+							Pending
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+					<tr class="info">
+						<td>
+							4
+						</td>
+						<td>
+							TB - Monthly
+						</td>
+						<td>
+						</td>
+						<td>
+							Call in
+						</td>
+						<td>
+						</td>
+						<td>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Report'
+        },
+        subtitle: {
+            text: 'Result'
+        },
+        xAxis: {
+            type: 'linear',
+            title: {
+                text: 'time(s)'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'num'
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: ' pass:{point.y},time:{point.x:.2f}s'
+        },
+
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+
+        series: [{
+            name: 'Pass num',
+            data: {{ pass_list }}
+        }, {
+            name: 'Error num',
+            data: {{ error_list }}
+        }, ]
+    });
+
+    $('#container2').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: ''
+        },
+        subtitle: {
+            text: 'Data Len'
+        },
+        xAxis: {
+            type: 'linear',
+            title: {
+                text: 'time(s)'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'len'
+            },
+            min: 0
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: ' Data len:{point.y},time:{point.x:.2f}s'
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: 'Data len',
+            data: {{ data_list }}
+        },  ]
+    });
+});
+		</script>
+	</head>
+	<body>
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	</body>
+</html>

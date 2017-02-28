@@ -1,0 +1,175 @@
+
+<html>
+
+<head>
+<meta charset="utf-8">
+	<title>dtree</title>
+
+	<link rel="StyleSheet" href="/static/css/dtree/dtree.css" type="text/css" />
+	<script type="text/javascript" src="/static/css/dtree/dtree.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+{#    以下是python编辑器格式关键字等相关CSS,JS。COPY于菜鸟工具#}
+    <script src="/static/css/runoob/codemirror.min.js"></script>
+    <link rel="stylesheet" href="/static/css/runoob/codemirror.css">
+    <script src="/static/css/runoob/python.js"></script>
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/css/runoob/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/runoob/style.css?version=1.01">
+    <!-- jQuery -->
+
+{#loagding相关#}
+    <link rel="stylesheet" type="text/css" href="/static/css/loading/normalize.css" />
+{#	<link rel="stylesheet" type="text/css" href="/static/css/loading/default.css">#}
+	<link rel="stylesheet" href="/static/loading/css/demo.css">
+	<link rel="stylesheet" href="/static/loading/css/ladda.min.css">
+    <script src="/static/loading/js/spin.min.js"></script>
+	<script src="/static/loading/js/ladda.min.js"></script>
+
+
+</head>
+
+
+<body>
+
+<div class="container">
+<br>
+<div class="row">
+
+	<div class="col-md-12">
+		<div class="panel panel-default">
+					<div id="compiler" class="panel-heading">
+			<form class="form-inline" role="form">
+<div class="container">
+                <a href="#" id="copy_case" class="btn btn-primary btn-lg ladda-button" data-style="expand-left" ><span class="ladda-label">copy_case</span></a>
+                <a href="#" id="run_case" class="btn btn-primary btn-lg ladda-button" data-style="expand-left" ><span class="ladda-label">run_case</span></a>
+</div>
+				 <label class="pull-right"><strong style="font-size: 16px"><i class="fa fa-cogs"></i> 用例在线执行</strong></label>
+			</form>
+			</div>
+			<div class="panel-body">
+			<form role="form" id="compiler-form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-7"style="width: 30%">
+                    <div class="dtree">
+
+    <script>
+        d = new dTree('d');
+        var arr = {{ dtree_list|safe }};
+        for(var i=0;i<arr.length;i++)
+        {
+            d.add(arr[i][0],arr[i][1],arr[i][2],arr[i][3],arr[i][4],0,0,'javascript:test()');
+        }
+
+        document.write(d);
+    </script>
+
+<p><a href="javascript:  d.closeAll();">open all</a> | <a href="javascript: d.openAll();">close all</a></p>
+    </div>
+                  </div>
+                  <div class="col-md-5" style="width: 70%">
+                    <textarea placeholder="运行结果……" class="form-control" id="compiler-textarea-result" rows="12"></textarea>
+                  </div>
+                </div>
+              </div>
+
+
+            </form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12">
+		<div id="about" class="panel panel-default">
+			<div class="panel-heading">概述</div>
+			<div class="panel-body">
+			<p> 用例、文件夹需以英文字母开头，且用例名格式为test_xxxx.py xxxx中不可包含test</p>			</div>
+        </div>
+
+	</div>
+</div>
+    </div>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+<!--
+function copy_case(){
+	var count = 0;
+    var checked_list= new Array();
+	var obj = document.all.authority;
+    var dict = {{ case_dirc|safe }};
+	for(i=0;i<obj.length;i++){
+		if(obj[i].checked){
+            checked_list.push(dict[obj[i].value]);
+			count ++;
+		}
+	}
+    var json = {};
+    for(var i=0;i<checked_list.length;i++)
+        {
+            json[i]=checked_list[i];
+        }
+    var data=JSON.stringify(json);
+    $.get("testCaseManger_Copy/",{'case_list':data},
+    function(ret){$('#compiler-textarea-result').html(ret)})
+
+}
+
+function test(){
+    alert("test");
+}
+//-->
+</script>
+
+<script>
+$(function() {
+$('#run_case').click(function(e){
+ e.preventDefault();
+ var l = Ladda.create(this);
+ l.start();
+  $.get("testCaseManger_Run/",{'pass':1}, function(ret){
+            $('#compiler-textarea-result').html(ret)})
+ .always(function() { l.stop(); });
+ return false;
+});
+});
+</script>
+
+<script>
+$(function() {
+$('#copy_case').click(function(e){
+ e.preventDefault();
+ var l = Ladda.create(this);
+ l.start();
+    var count = 0;
+    var checked_list= new Array();
+	var obj = document.all.authority;
+    var dict = {{ case_dirc|safe }};
+	for(i=0;i<obj.length;i++){
+		if(obj[i].checked){
+            checked_list.push(dict[obj[i].value]);
+			count ++;
+		}
+	}
+    var json = {};
+    for(var i=0;i<checked_list.length;i++)
+        {
+            json[i]=checked_list[i];
+        }
+    var data=JSON.stringify(json);
+    $.get("testCaseManger_Copy/",{'case_list':data},
+    function(ret){$('#compiler-textarea-result').html(ret)})
+ .always(function() { l.stop(); });
+ return false;
+});
+});
+</script>
+</html>

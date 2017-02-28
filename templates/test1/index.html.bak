@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style type="text/css">
+		
+		
+		
+	</style>
+    <meta charset="UTF-8">
+    <title>The list of</title>
+</head>
+<body>
+	<div id="header">
+	<a>GET</a>
+	<a>POST</a>
+	</div>
+
+<iframe frameborder=0 src="/test1/indexGet/"></iframe>
+<iframe frameborder=0 src="/test1/indexPost/"></iframe>
+</body>
+</html>
